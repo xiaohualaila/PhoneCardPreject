@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ug.phonecardpreject.MainActivity"
+     android:orientation="vertical">
+<TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/colorPrimary"
+    android:textSize="26sp"
+    android:textStyle="bold"
+    android:textColor="@color/wright"
+    android:gravity="center"
+    android:text="手持验票"/>
+
+<LinearLayout
+    android:layout_below="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="卡号："/>
+    <TextView
+        android:id="@+id/card_no"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+        <Button
+            android:id="@+id/read_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20sp"
+            android:gravity="center"
+            android:onClick="click"
+            android:layout_alignParentBottom="true"
+            android:text="读取id卡"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:layout_marginBottom="80dp"
+            android:layout_above="@+id/code"
+            android:background="@drawable/background_corner"/>
+        <Button
+            android:id="@+id/code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20sp"
+            android:gravity="center"
+            android:onClick="click"
+            android:layout_alignParentBottom="true"
+            android:text="二维码验票"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/background_corner"/>
+
+</RelativeLayout>
