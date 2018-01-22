@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 对CPU卡演示操作
@@ -37,6 +40,7 @@ public class CardCPUActivity2 extends Activity {
     private TextView info;
     private Button code;
     private Button read_id;
+    private boolean isBackKeyPressed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +54,19 @@ public class CardCPUActivity2 extends Activity {
         read_id.setVisibility(View.VISIBLE);
         Card.onLog(handler);
         Card.init(115200);
+        DisplayMetrics dm = new DisplayMetrics();
+
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        Log.i("sss","heigth  " +dm.heightPixels );
+//        Log.i("sss","width  " +dm.widthPixels );
     }
 
     public void click(View view) {
         switch (view.getId()){
             case R.id.code:
-                startActivity(new Intent(this,MainActivity.class));
                 finish();
+                startActivity(new Intent(this,MainActivity.class));
+
                 break;
             case R.id.read_id:
                 info.setText("");
@@ -106,4 +116,26 @@ public class CardCPUActivity2 extends Activity {
         return super.dispatchKeyEvent(event);
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            if(isBackKeyPressed) {
+                finish();
+            }
+            else {
+                isBackKeyPressed = true;
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Timer timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
+                    public void run() {
+                        isBackKeyPressed = false;
+                    }
+                };
+                timer.schedule(timerTask, 2000);//600毫秒后无再次点击，则复位
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -18,15 +18,20 @@ import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
     boolean isStop = false;
     private TextView title;
     private TextView card_no;
     private Button code;
+    private boolean isBackKeyPressed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         title = findViewById(R.id.title);
         card_no = findViewById(R.id.card_no);
         code = ((Button) findViewById(R.id.code));
@@ -64,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void click(View view) {
-        startActivity(new Intent(this,CardCPUActivity2.class));
         finish();
+        startActivity(new Intent(this,CardCPUActivity2.class));
+
     }
 
     /*
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         msg.obj = s;
                         handler.sendMessage(msg);
                     }
-                    Thread.sleep(100);
+                    Thread.sleep(300);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -109,5 +115,27 @@ public class MainActivity extends AppCompatActivity {
         ModuleControl.rf_rfinf_reset(Ultralight.id, (byte) 0);
         Ultralight.offLog();
         Ultralight.exit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            if(isBackKeyPressed) {
+                finish();
+            }
+            else {
+                isBackKeyPressed = true;
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Timer timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
+                    public void run() {
+                        isBackKeyPressed = false;
+                    }
+                };
+                timer.schedule(timerTask, 2000);//600毫秒后无再次点击，则复位
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
