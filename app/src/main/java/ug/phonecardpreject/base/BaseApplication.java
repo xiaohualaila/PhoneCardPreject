@@ -23,6 +23,7 @@
 package ug.phonecardpreject.base;
 
 import android.app.Application;
+import android.content.Context;
 
 import ug.phonecardpreject.api.Diycode;
 import ug.phonecardpreject.util.Config;
@@ -32,7 +33,7 @@ public class BaseApplication extends Application {
 
     public static final String client_id = "7024a413";
     public static final String client_secret = "8404fa33ae48d3014cfa89deaa674e4cbe6ec894a57dbef4e40d083dbbaa5cf4";
-
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -42,9 +43,13 @@ public class BaseApplication extends Application {
 //        LeakCanary.install(this);
 //
 //        CrashHandler.getInstance().init(this);
+        mContext = getApplicationContext();
 
         Diycode.init(this, client_id, client_secret);
 
         Config.init(this);
+    }
+    public static Context getContext() {
+        return mContext;
     }
 }
