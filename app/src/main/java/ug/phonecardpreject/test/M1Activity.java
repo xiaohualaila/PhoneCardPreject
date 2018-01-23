@@ -1,4 +1,4 @@
-package ug.phonecardpreject;
+package ug.phonecardpreject.test;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -7,6 +7,9 @@ import com.yuwei.utils.Card;
 import com.yuwei.utils.CardM1;
 import com.yuwei.utils.ModuleControl;
 import java.util.Date;
+
+import ug.phonecardpreject.R;
+
 import static com.yuwei.utils.CardCommon.log;
 import static com.yuwei.utils.CardM1.rf_read;
 

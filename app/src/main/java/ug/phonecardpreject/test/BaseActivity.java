@@ -1,4 +1,4 @@
-package ug.phonecardpreject;
+package ug.phonecardpreject.test;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import ug.phonecardpreject.R;
 
 
 /**

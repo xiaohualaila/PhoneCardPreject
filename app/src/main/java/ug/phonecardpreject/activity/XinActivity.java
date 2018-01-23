@@ -1,4 +1,4 @@
-package ug.phonecardpreject;
+package ug.phonecardpreject.activity;
 
 
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
@@ -21,12 +20,16 @@ import com.yuwei.utils.Ultralight;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+import ug.phonecardpreject.R;
+import ug.phonecardpreject.activity.CardCPUActivity2;
+
+public class XinActivity extends AppCompatActivity {
     boolean isStop = false;
     private TextView title;
     private TextView card_no;
-    private Button code;
-    private boolean isBackKeyPressed = false;
+    private Button back;
+
+    private boolean isfirst = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         title = findViewById(R.id.title);
         card_no = findViewById(R.id.card_no);
-        code = ((Button) findViewById(R.id.code));
+        back = ((Button) findViewById(R.id.back));
         title.setText("芯片验票");
-        code.setText("二维码验票");
     }
 
     @Override
@@ -69,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void click(View view) {
-        finish();
-        startActivity(new Intent(this,CardCPUActivity2.class));
-
+        if(isfirst) {
+            isfirst = false;
+            finish();
+        }
     }
 
     /*
@@ -117,25 +120,5 @@ public class MainActivity extends AppCompatActivity {
         Ultralight.exit();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK) {
-            if(isBackKeyPressed) {
-                finish();
-            }
-            else {
-                isBackKeyPressed = true;
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                Timer timer = new Timer();
-                TimerTask timerTask = new TimerTask() {
-                    public void run() {
-                        isBackKeyPressed = false;
-                    }
-                };
-                timer.schedule(timerTask, 2000);//600毫秒后无再次点击，则复位
-            }
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
 }

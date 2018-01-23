@@ -1,4 +1,4 @@
-package ug.phonecardpreject;
+package ug.phonecardpreject.test;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import ug.phonecardpreject.R;
 
 /**
  * 对CPU卡演示操作
@@ -68,7 +70,7 @@ public class CardCPUActivity extends Activity  {
 
     int id = -1;
 
-    private static final String LOG = "---MainActivity";
+    private static final String LOG = "---XinActivity";
 
     public void click(View v) {
         boolean result = false;

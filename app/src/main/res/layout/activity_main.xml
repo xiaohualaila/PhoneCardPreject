@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ug.phonecardpreject.MainActivity"
+    tools:context="ug.phonecardpreject.activity.XinActivity"
      android:orientation="vertical">
 <TextView
     android:id="@+id/title"
@@ -47,10 +47,10 @@
             android:textSize="20sp"
             android:visibility="gone"
             android:layout_marginBottom="80dp"
-            android:layout_above="@+id/code"
+            android:layout_above="@+id/back"
             android:background="@drawable/background_corner"/>
         <Button
-            android:id="@+id/code"
+            android:id="@+id/back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:onClick="click"
             android:layout_alignParentBottom="true"
-            android:text="二维码验票"
+            android:text="返回"
             android:textSize="20sp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/background_corner"/>

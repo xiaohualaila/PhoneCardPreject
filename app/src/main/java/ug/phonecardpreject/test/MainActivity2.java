@@ -1,4 +1,4 @@
-package ug.phonecardpreject;
+package ug.phonecardpreject.test;
 
 
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
+
+import ug.phonecardpreject.R;
 
 public class MainActivity2 extends AppCompatActivity {
     boolean isStop = false;
