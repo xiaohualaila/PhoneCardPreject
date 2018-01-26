@@ -25,14 +25,6 @@ import ug.phonecardpreject.util.GetDataUtil;
  */
 
 public class ShowActivity  extends BaseActivity {
-    LinearLayout ll_scan;
-    LinearLayout ll_xin;
-    LinearLayout ll_faxing;
-    LinearLayout ll_clean_data;
-    LinearLayout ll_data_down;
-    LinearLayout ll_data_up;
-    LinearLayout ll_setup;
-    LinearLayout ll_quit;
     private boolean isBackKeyPressed = false;
     private String path;
 
@@ -43,15 +35,6 @@ public class ShowActivity  extends BaseActivity {
 
     @Override
     protected void initViews(ViewHolder holder, View root) {
-        ll_scan = holder.get(R.id.ll_scan);
-        ll_xin = holder.get(R.id.ll_xin);
-        ll_faxing = holder.get(R.id.ll_faxing);
-        ll_clean_data = holder.get(R.id.ll_clean_data);
-        ll_data_down = holder.get(R.id.ll_data_down);
-        ll_data_up = holder.get(R.id.ll_data_up);
-        ll_setup = holder.get(R.id.ll_setup);
-        ll_quit = holder.get(R.id.ll_quit);
-
         holder.setOnClickListener(this, R.id.ll_scan,R.id.ll_xin,R.id.ll_faxing,R.id.ll_clean_data,
                 R.id.ll_data_down,R.id.ll_data_up,R.id.ll_setup,R.id.ll_quit);
     }

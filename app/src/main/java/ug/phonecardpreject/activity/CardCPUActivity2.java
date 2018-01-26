@@ -1,8 +1,5 @@
 package ug.phonecardpreject.activity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
@@ -11,43 +8,35 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 import ug.phonecardpreject.R;
+import ug.phonecardpreject.base.BaseActivity;
+import ug.phonecardpreject.base.ViewHolder;
 
 /**
  * 对CPU卡演示操作
  */
-public class CardCPUActivity2 extends Activity {
+public class CardCPUActivity2 extends BaseActivity {
 
-
-    private TextView title;
     private TextView info;
-    private Button back;
     private Button read_id;
 
-    private boolean isfirst = true;
-
-    boolean isStop = false;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        title = findViewById(R.id.title);
-        info = ((TextView) findViewById(R.id.card_no));
-        back = ((Button) findViewById(R.id.back));
-        read_id = ((Button) findViewById(R.id.read_id));
-        title.setText("二维码验票");
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initViews(ViewHolder holder, View root) {
+        setTitle("二维码验票");
+        info = holder.get(R.id.card_no);
+        read_id = holder.get(R.id.read_id);
         read_id.setVisibility(View.VISIBLE);
         Card.onLog(handler);
         Card.init(115200);
-        DisplayMetrics dm = new DisplayMetrics();
+
+        holder.setOnClickListener(this,R.id.read_id);
     }
 
     private Handler handler = new Handler() {
@@ -58,25 +47,6 @@ public class CardCPUActivity2 extends Activity {
         }
     };
 
-    public void click(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                if(isfirst){
-                    isfirst = false;
-                    finish();
-                }
-                break;
-            case R.id.read_id:
-                info.setText("");
-                //获取卡id
-                byte[] id = Card.getID();
-                String id_code = Hex.toHexString(id);
-                if(id_code != null){
-                    info.setText(Hex.toHexString(id) + "00");
-                }
-                break;
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -113,4 +83,18 @@ public class CardCPUActivity2 extends Activity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.read_id:
+                info.setText("");
+                //获取卡id
+                byte[] id = Card.getID();
+                String id_code = Hex.toHexString(id);
+                if(id_code != null){
+                    info.setText(Hex.toHexString(id) + "00");
+                }
+                break;
+        }
+    }
 }

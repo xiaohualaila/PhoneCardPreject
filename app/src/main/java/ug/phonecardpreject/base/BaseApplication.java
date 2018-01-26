@@ -52,4 +52,10 @@ public class BaseApplication extends Application {
     public static Context getContext() {
         return mContext;
     }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        System.out.println("App.onTerminate");
+    }
 }

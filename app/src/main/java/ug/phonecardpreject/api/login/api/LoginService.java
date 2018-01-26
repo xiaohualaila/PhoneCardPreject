@@ -43,8 +43,8 @@ interface LoginService {
      * @param username      用户名
      * @param password      密码
      * @return Token 实体类
-     */
     @POST(Constant.BASE_URL)
+     */
     @FormUrlEncoded
     Call<Token> getToken(
             @Field("username") String username,

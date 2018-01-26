@@ -1,44 +1,36 @@
 package ug.phonecardpreject.activity;
 
-
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 import ug.phonecardpreject.R;
-import ug.phonecardpreject.activity.CardCPUActivity2;
+import ug.phonecardpreject.base.BaseActivity;
+import ug.phonecardpreject.base.ViewHolder;
 
-public class XinActivity extends AppCompatActivity {
+
+public class XinActivity extends BaseActivity {
     boolean isStop = false;
-    private TextView title;
     private TextView card_no;
-    private Button back;
 
-    private boolean isfirst = true;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
-        title = findViewById(R.id.title);
-        card_no = findViewById(R.id.card_no);
-        back = ((Button) findViewById(R.id.back));
-        title.setText("芯片验票");
+    @Override
+    protected void initViews(ViewHolder holder, View root) {
+        setTitle("芯片验票");
+        card_no = holder.get(R.id.card_no);
+
     }
 
     @Override
@@ -70,11 +62,8 @@ public class XinActivity extends AppCompatActivity {
         }
     };
 
-    public void click(View view) {
-        if(isfirst) {
-            isfirst = false;
-            finish();
-        }
+    @Override
+    public void onClick(View v) {
     }
 
     /*
@@ -108,7 +97,6 @@ public class XinActivity extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     protected void onDestroy() {

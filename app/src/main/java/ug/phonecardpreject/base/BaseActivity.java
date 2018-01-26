@@ -56,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mViewHolder = new ViewHolder(getLayoutInflater(), null, getLayoutId());
         setContentView(mViewHolder.getRootView());
       // IMMLeaks.fixFocusedViewLeak(this.getApplication()); // 修复 InputMethodManager 引发的内存泄漏
-   //     initActionBar(mViewHolder);
+        initActionBar(mViewHolder);
         initDatas();
         initViews(mViewHolder, mViewHolder.getRootView());
     }
@@ -77,28 +77,28 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected abstract void initViews(ViewHolder holder, View root);
 
 
-//    // 初始化 ActiobBar
-//    private void initActionBar(ViewHolder holder) {
-//        Toolbar toolbar = holder.get(R.id.toolbar);
-//        if (toolbar != null) {
-//            setSupportActionBar(toolbar);
-//        }
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
-//    }
-//
-//    // 默认点击左上角是结束当前 Activity
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                finish();
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    // 初始化 ActiobBar
+    private void initActionBar(ViewHolder holder) {
+        Toolbar toolbar = holder.get(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    // 默认点击左上角是结束当前 Activity
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     public ViewHolder getViewHolder() {

@@ -4,63 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ug.phonecardpreject.activity.XinActivity"
-     android:orientation="vertical">
-<TextView
-    android:id="@+id/title"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="@color/colorPrimary"
-    android:textSize="26sp"
-    android:textStyle="bold"
-    android:textColor="@color/wright"
-    android:gravity="center"
-    android:text="手持验票"/>
+    android:orientation="vertical"
+    tools:context="ug.phonecardpreject.activity.XinActivity">
 
-<LinearLayout
-    android:layout_below="@+id/title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="卡号："/>
-    <TextView
-        android:id="@+id/card_no"
-        android:textSize="24sp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
-        <Button
-            android:id="@+id/read_id"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/wright"
+        app:theme="@style/toolBar3"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="卡号："
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/card_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20sp"
-            android:gravity="center"
-            android:onClick="click"
-            android:layout_alignParentBottom="true"
-            android:text="读取id卡"
-            android:textSize="20sp"
-            android:visibility="gone"
-            android:layout_marginBottom="80dp"
-            android:layout_above="@+id/back"
-            android:background="@drawable/background_corner"/>
-        <Button
-            android:id="@+id/back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20sp"
-            android:gravity="center"
-            android:onClick="click"
-            android:layout_alignParentBottom="true"
-            android:text="返回"
-            android:textSize="20sp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/background_corner"/>
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/read_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20sp"
+        android:background="@drawable/background_corner"
+        android:gravity="center"
+        android:text="读取id卡"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
 
 </RelativeLayout>

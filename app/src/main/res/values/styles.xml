@@ -15,4 +15,32 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="toolBar3">
+        <item name="colorControlNormal">#ffffff</item>
+    </style>
+    <style name="bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@mipmap/bg</item>
+    </style>
+    <style name="btn">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:background">@drawable/btn</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="et">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_marginRight">6dp</item>
+    </style>
+    <style name="iv_yp">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@mipmap/fanka</item>
+    </style>
+
 </resources>
