@@ -16,11 +16,11 @@ public class WhiteList {
     private String name;//姓名
     private String xin_id;//芯片id
     private String code_id;//二维码id
-    private int num;//次数
+    private String num;//次数
     @Keep
     @Generated(hash = 577612888)
     public WhiteList(String name, String xin_id, String code_id,
-            int num) {
+                     String num) {
         this.name = name;
         this.xin_id = xin_id;
         this.code_id = code_id;
@@ -30,9 +30,10 @@ public class WhiteList {
     @Generated(hash = 697618186)
     public WhiteList() {
     }
+    @Keep
     @Generated(hash = 577612888)
     public WhiteList(Long _id, String name, String xin_id, String code_id,
-            int num) {
+                     String num) {
         this._id = _id;
         this.name = name;
         this.xin_id = xin_id;
@@ -63,10 +64,10 @@ public class WhiteList {
     public void setCode_id(String code_id) {
         this.code_id = code_id;
     }
-    public int getNum() {
+    public String getNum() {
         return this.num;
     }
-    public void setNum(int num) {
+    public void setNum(String num) {
         this.num = num;
     }
 

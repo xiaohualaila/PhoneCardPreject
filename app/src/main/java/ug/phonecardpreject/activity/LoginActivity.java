@@ -1,21 +1,12 @@
 package ug.phonecardpreject.activity;
 
-import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import ug.phonecardpreject.R;
-import ug.phonecardpreject.api.login.event.LoginEvent;
+
 import ug.phonecardpreject.base.BaseActivity;
 import ug.phonecardpreject.base.ViewHolder;
 import ug.phonecardpreject.log.Logger;
@@ -35,7 +26,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initViews(ViewHolder holder, View root) {
-        setTitle("");
+
         mUsername = holder.get(R.id.username);
         mPassword = holder.get(R.id.password);
 
@@ -47,8 +38,8 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-//                String name = mUsername.getText().toString();
-//                String pswd = mPassword.getText().toString();
+                String name = mUsername.getText().toString();
+                String pswd = mPassword.getText().toString();
 //                if (name.isEmpty() || pswd.isEmpty()) {
 //                    toastShort("账号或密码不能为空");
 //                    return;
@@ -90,7 +81,7 @@ public class LoginActivity extends BaseActivity {
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                Logger.e("onGlobalLayout");
+                    Logger.e("onGlobalLayout");
                 if (isKeyboardShown(rootView)) {
                     Logger.e("软键盘弹起");
                     getViewHolder().get(R.id.span1).setVisibility(View.GONE);

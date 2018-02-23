@@ -7,20 +7,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
 import ug.phonecardpreject.R;
 import ug.phonecardpreject.base.BaseActivity;
 import ug.phonecardpreject.base.ViewHolder;
+import ug.phonecardpreject.bean.WhiteList;
+import ug.phonecardpreject.greendaodemo.GreenDaoManager;
+import ug.phonecardpreject.greendaodemo.greendao.gen.WhiteListDao;
 
 
 public class XinActivity extends BaseActivity {
     boolean isStop = false;
-    private TextView card_no;
-
-
+    private TextView card_no,title_text,name;
+    LinearLayout ll_img,wrong_tip,right_tip;
+    RelativeLayout ll_content;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -28,9 +35,15 @@ public class XinActivity extends BaseActivity {
 
     @Override
     protected void initViews(ViewHolder holder, View root) {
-        setTitle("芯片验票");
+        setTitle("");
         card_no = holder.get(R.id.card_no);
-
+        title_text = holder.get(R.id.title_text);
+        ll_img = holder.get(R.id.ll_img);
+        ll_content = holder.get(R.id.ll_content);
+        name = holder.get(R.id.name);
+        wrong_tip = holder.get(R.id.wrong_tip);
+        right_tip = holder.get(R.id.right_tip);
+        title_text.setText("芯片验票");
     }
 
     @Override
@@ -54,10 +67,25 @@ public class XinActivity extends BaseActivity {
         public void handleMessage(final Message msg) {
             super.handleMessage(msg);
             if (msg.what == -1) {
-                card_no.setText(msg.obj.toString());
-
+                ll_img.setVisibility(View.VISIBLE);
+                ll_content.setVisibility(View.GONE);
+                wrong_tip.setVisibility(View.GONE);
+                right_tip.setVisibility(View.GONE);
             } else if (msg.what == 1) {
-                card_no.setText(msg.obj.toString());
+                WhiteList whiteList = (WhiteList) msg.obj;
+                ll_img.setVisibility(View.GONE);
+                ll_content.setVisibility(View.VISIBLE);
+                wrong_tip.setVisibility(View.GONE);
+                right_tip.setVisibility(View.VISIBLE);
+                name.setText(whiteList.getName());
+                card_no.setText(whiteList.getXin_id());
+            }else if(msg.what == 2){
+                ll_img.setVisibility(View.GONE);
+                ll_content.setVisibility(View.VISIBLE);
+                wrong_tip.setVisibility(View.VISIBLE);
+                right_tip.setVisibility(View.GONE);
+                name.setText("");
+                card_no.setText("");
             }
         }
     };
@@ -78,21 +106,33 @@ public class XinActivity extends BaseActivity {
                     if (id == null) {
                         Message msg = Message.obtain();
                         msg.what = -1;
-                        msg.obj = "请放票卡";
                         handler.sendMessage(msg);
                     } else {
                         String s = Hex.toHexString(id);//获取到卡片ID值之后(16进制数组转化为字符串);
+
                         Log.i("sss", ">>>>>>>>" + s);
-                        Message msg = Message.obtain();
-                        msg.what = 1;
-                        msg.obj = s;
-                        handler.sendMessage(msg);
+                        checkData(s);
                     }
                     Thread.sleep(300);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 finish();
+            }
+        }
+
+        private void checkData(String ticket) {
+            WhiteList whiteList= GreenDaoManager.getInstance().getSession().getWhiteListDao()
+                    .queryBuilder().where(WhiteListDao.Properties.Xin_id.eq(ticket)).build().unique();
+            if(whiteList != null){
+                Message msg = Message.obtain();
+                msg.what = 1;
+                msg.obj = whiteList;
+                handler.sendMessage(msg);
+            }else {
+                Message msg = Message.obtain();
+                msg.what = 2;
+                handler.sendMessage(msg);
             }
         }
 

@@ -13,10 +13,13 @@
         app:theme="@style/toolBar3"
         android:background="@color/colorPrimary" />
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp">
+        android:layout_marginRight="6dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,13 +112,14 @@
             android:visibility="gone"
             android:layout_height="wrap_content" />
         <Button
-            style="@style/btn"
-            android:layout_width="100dp"
+            android:background="@drawable/background_corner"
+            android:layout_width="match_parent"
             android:text="清空票卡"
-            android:textSize="14dp"
+            android:textSize="18dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:onClick="clickUpdata"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:id="@+id/bt_clear" />
     </RadioGroup>
     <ImageView

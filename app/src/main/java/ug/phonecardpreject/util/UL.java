@@ -1,6 +1,8 @@
 package ug.phonecardpreject.util;
 
 
+import android.util.Log;
+
 import com.yuwei.utils.Cryptography;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.Ultralight;
@@ -47,6 +49,7 @@ public class UL {
         }
         byte[] decrypted = Cryptography.decrypted(data, csecret);
         String s = Hex.toHexString(decrypted);
+        Log.i("xxx",s + ">>>>>>>>>>>>>>>>>>>>");
         if (id == null) {
             byte[] bid = Ultralight.rf_UL_findcard();
             id = Hex.toHexString(bid);

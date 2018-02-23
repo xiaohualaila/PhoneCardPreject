@@ -37,6 +37,7 @@ import ug.phonecardpreject.base.ViewHolder;
 import ug.phonecardpreject.bean.Card;
 import ug.phonecardpreject.bean.CardType;
 import ug.phonecardpreject.storage.Sp;
+import ug.phonecardpreject.storage.Sql;
 import ug.phonecardpreject.util.C;
 import ug.phonecardpreject.util.SBmp;
 import ug.phonecardpreject.util.UL;
@@ -83,7 +84,7 @@ public class UWriteActivity extends  ug.phonecardpreject.base.BaseActivity  {
 
     @Override
     protected void initViews(ViewHolder holder, View root) {
-        setTitle("芯片验票");
+        setTitle("发行票卡");
         et_serial_number = holder.get(R.id.et_serial_number);
         cb_pwd = holder.get(R.id.cb_pwd);
         tv_content =holder.get(R.id.tv_content);
@@ -109,17 +110,7 @@ public class UWriteActivity extends  ug.phonecardpreject.base.BaseActivity  {
      //   cardType = ctMap.get("1");//活动类型
       //  setData();
         setView();
-        String a = "123";
-        String s = Cryptography.string2MD5(a + Utils.DENG);//经理要求MD5之后,也写到加密函数里面去;
-        byte[] encrypted = Cryptography.encrypted(Hex.hexStringToByteArray(s), Cryptography.UPWD);
-        String md52 = Cryptography.string2MD5(Utils.ULTRALIGHT + s);
-        csecret = Hex.toByteArray(md52);
-        Sp.setcSecret(s + "|" + Hex.toHexString(encrypted) + "|" + a);
 
-        String s1 = Cryptography.string2MD5(a + Utils.DENG);
-        byte[] encrypted1 = Cryptography.encrypted(Hex.hexStringToByteArray(s1), Cryptography.UPWD);
-        usecret = Hex.toByteArray(Cryptography.string2MD5(Utils.ULTRALIGHT + s1));
-        Sp.setuSecret(s + "|" + Hex.toHexString(encrypted1) + "|" + a);
         //设置出厂秘钥
         if (!Utils.isSecret()) {
             finish();
@@ -204,8 +195,7 @@ public class UWriteActivity extends  ug.phonecardpreject.base.BaseActivity  {
         Card y = new Card();
         y.setId(cardId);
         sql.insertFA(sql.FAU, y);
-   //     isPack();
-
+        isPack();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -308,7 +298,7 @@ public class UWriteActivity extends  ug.phonecardpreject.base.BaseActivity  {
                                          //   if (onlyid) {
                                                 b = UL.uwriteId(id);
                                            // } else {
-                                          //      b = UL.uwrite(id, cardType.getId(), place, qu, pai, hao, sn);//门票类型，活动类型，区，排，号，票证编号
+                                              //  b = UL.uwrite(id, cardType.getId(), place, qu, pai, hao, sn);//门票类型，活动类型，区，排，号，票证编号
                                            // }
 
                                             if (SUCCESS.equals(b)) {
@@ -468,7 +458,8 @@ public class UWriteActivity extends  ug.phonecardpreject.base.BaseActivity  {
     }
 
     public void clickUpdata(View view) {
-     //   H.updatasAll(this, sql.FAU);
+//        H.updatasAll(this, sql.FAU);
+//        sql.deleteAll(sql.FAU);
     }
 
     @Override

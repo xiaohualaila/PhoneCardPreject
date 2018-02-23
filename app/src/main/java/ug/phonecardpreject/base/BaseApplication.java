@@ -25,7 +25,8 @@ package ug.phonecardpreject.base;
 import android.app.Application;
 import android.content.Context;
 
-import ug.phonecardpreject.api.Diycode;
+
+import ug.phonecardpreject.log.Logger;
 import ug.phonecardpreject.util.Config;
 
 
@@ -45,9 +46,8 @@ public class BaseApplication extends Application {
 //        CrashHandler.getInstance().init(this);
         mContext = getApplicationContext();
 
-        Diycode.init(this, client_id, client_secret);
-
         Config.init(this);
+        Logger.init("card").setLevel(ug.phonecardpreject.log.Config.LEVEL_FULL);
     }
     public static Context getContext() {
         return mContext;

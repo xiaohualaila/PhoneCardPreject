@@ -19,7 +19,7 @@ public class C {
      * pos机号
      */
     public static String imei = Sp.getDeviceId();
-    public static final int SLEEP = 100;
+    public static final int SLEEP = 300;
     public static final int SLEEP_UP = 3000;
     public final static Sql sql = Sql.getInstance();
     public static byte[] csecret;//设置界面发行时赋值;

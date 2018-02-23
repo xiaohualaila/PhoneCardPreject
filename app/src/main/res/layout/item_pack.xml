@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="6dp"
     android:id="@+id/item_pack"
+    android:layout_marginTop="20dp"
     android:layout_marginRight="6dp">
 
     <TextView

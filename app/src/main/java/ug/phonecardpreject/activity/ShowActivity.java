@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,7 +42,7 @@ public class ShowActivity  extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_scan:
-                openActivity(CardCPUActivity2.class);
+                openActivity(ScanActivity.class);
                 break;
             case R.id.ll_xin:
                 openActivity(XinActivity.class);
@@ -76,11 +75,18 @@ public class ShowActivity  extends BaseActivity {
             case R.id.ll_data_down:
                 getExcel();
                 break;
+            case R.id.ll_data_up:
+                toastShort("等待添加功能");
+//                openActivity(UWriteActivity.class);
+                break;
             case R.id.ll_setup:
                 toastShort("等待添加功能");
+             //   openActivity(SetUpActivity.class);
                 break;
             case R.id.ll_quit:
                 quitPreject();
+             //   openActivity(IDActivity.class);
+
                 break;
 
 

@@ -2,4 +2,31 @@
     <string name="app_name">手持验票</string>
     <string name="dialog_msg">文件不存在,请将文件放入设备存储door文件下,文件名a.xls！</string>
     <string name="load_fail">文件加载失败！</string>
+
+    <string name="bt_cancel">取消&#x0020;&#x0020;&#x0020;&#x0020;</string>
+    <string name="bt_ok">确定&#x0020;&#x0020;&#x0020;&#x0020;</string>
+    <string name="setting_active">设置活动名称</string>
+    <string name="setting_fa">开始发行票卡</string>
+    <string name="factory_setting">出厂设置</string>
+    <string name="user_setting">用户设置</string>
+    <string name="setting_device">设置设备参数</string>
+    <string name="setting_qu">设置票卡区名</string>
+    <string name="setting_type">设置票卡类型</string>
+    <string name="setting_secret">设置票卡秘钥</string>
+    <string name="setting_card_clear">清空票卡内容</string>
+
+    <string name="yan_myxx">秘钥信息检验模式</string>
+    <string name="yan_yhmy">用户秘钥检验模式</string>
+    <string name="yan_xpmy">芯片秘钥检验模式</string>
+    <string name="yan_xpid">芯片ＩＤ检验模式</string>
+    <string name="yan_dzhh">多种混合检验模式</string>
+    <string name="yan_time">用户实时检票模式</string>
+
+
+    <string name="test">测试</string>
+    <string name="secret_publish">发布</string>
+    <string name="checked_type_setting">验票模式设置</string>
+    <string name="about">关于</string>
+    <string name="select_check_type">选择验票模式</string>
+    <string name="secret_publish_chipid_checking">加密发行-芯片ID-开始检票...</string>
 </resources>

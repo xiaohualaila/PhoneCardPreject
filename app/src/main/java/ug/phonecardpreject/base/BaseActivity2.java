@@ -35,11 +35,15 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import java.io.Serializable;
+
 import ug.phonecardpreject.R;
+import ug.phonecardpreject.log.Config;
+import ug.phonecardpreject.log.Logger;
 
 
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class BaseActivity2 extends AppCompatActivity implements View.OnClickListener{
     protected ViewHolder mViewHolder;
     private Toast mToast;
 
@@ -47,11 +51,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mViewHolder = new ViewHolder(getLayoutInflater(), null, getLayoutId());
         setContentView(mViewHolder.getRootView());
       // IMMLeaks.fixFocusedViewLeak(this.getApplication()); // 修复 InputMethodManager 引发的内存泄漏
-        initActionBar(mViewHolder);
+      //  initActionBar(mViewHolder);
         initDatas();
         initViews(mViewHolder, mViewHolder.getRootView());
     }

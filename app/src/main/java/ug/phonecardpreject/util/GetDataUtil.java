@@ -47,7 +47,7 @@ public class GetDataUtil {
              String name;//姓名
              String xin_id;//芯片id
              String code_id;//二维码id
-             int num;//次数
+             String num;//次数
              String idCardNo;//身份证号3
              String company;//公司4
              String work;//职位5
@@ -58,18 +58,19 @@ public class GetDataUtil {
                 name = sheet.getCell(0, i).getContents();
                 xin_id = sheet.getCell(1, i).getContents();
                 code_id = sheet.getCell(2, i).getContents();
-                num = Integer.parseInt(sheet.getCell(3, i).getContents());
+                num = sheet.getCell(3, i).getContents();
 
                 Log.i("xxx",name +" "+ xin_id +" "+code_id+" "+num+" ");
                 if(TextUtils.isEmpty(name) && TextUtils.isEmpty(xin_id)&& TextUtils.isEmpty(code_id)){
                     break;
                 }
-                whiteList = new WhiteList(name,xin_id.toUpperCase(),code_id.toUpperCase().trim(),num);
+                whiteList = new WhiteList(name,xin_id,code_id,num);
                 whiteListDao.insert(whiteList);
             }
             workbook.close();
             saveSuccess = true;
         } catch (Exception e) {
+            Log.i("sss",">>>"+e.toString());
             saveSuccess =false;
         }
         return saveSuccess;
