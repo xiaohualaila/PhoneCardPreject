@@ -2,6 +2,7 @@ package ug.phonecardpreject.activity;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,14 +11,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
+
+import java.io.File;
+
 import ug.phonecardpreject.R;
 import ug.phonecardpreject.base.BaseActivity;
 import ug.phonecardpreject.base.ViewHolder;
 import ug.phonecardpreject.bean.WhiteList;
 import ug.phonecardpreject.greendaodemo.GreenDaoManager;
 import ug.phonecardpreject.greendaodemo.greendao.gen.WhiteListDao;
+import ug.phonecardpreject.util.FileUtil;
 
 /**
  * 二维码验票
@@ -27,7 +35,7 @@ public class ScanActivity extends BaseActivity {
 
     LinearLayout ll_img,wrong_tip,right_tip;
     RelativeLayout ll_content;
-    ImageView card_img;
+    ImageView card_img,people_img;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -41,6 +49,7 @@ public class ScanActivity extends BaseActivity {
         ll_img = holder.get(R.id.ll_img);
         ll_content = holder.get(R.id.ll_content);
         card_img = holder.get(R.id.card_img);
+        people_img = holder.get(R.id.people_img);
         name = holder.get(R.id.name);
         wrong_tip = holder.get(R.id.wrong_tip);
         right_tip = holder.get(R.id.right_tip);
@@ -61,6 +70,7 @@ public class ScanActivity extends BaseActivity {
                 wrong_tip.setVisibility(View.GONE);
                 right_tip.setVisibility(View.GONE);
             } else if (msg.what == 1) {
+                //查询到人
                 WhiteList whiteList = (WhiteList) msg.obj;
                 ll_img.setVisibility(View.GONE);
                 ll_content.setVisibility(View.VISIBLE);
@@ -68,6 +78,7 @@ public class ScanActivity extends BaseActivity {
                 right_tip.setVisibility(View.VISIBLE);
                 name.setText(whiteList.getName());
                 info.setText(whiteList.getXin_id());
+                showImage(whiteList.getName());
             }else if(msg.what == 2){
                 ll_img.setVisibility(View.GONE);
                 ll_content.setVisibility(View.VISIBLE);
@@ -75,9 +86,19 @@ public class ScanActivity extends BaseActivity {
                 right_tip.setVisibility(View.GONE);
                 name.setText("");
                 info.setText("");
+                people_img.setImageResource(R.drawable.no_people);
             }
         }
     };
+
+    public void showImage(String name){
+        String filePath = FileUtil.getPath() + File.separator + "photo" + "name" + ".jpeg";
+        RequestOptions options = new RequestOptions()
+                .error(R.drawable.no_people);
+        if (!TextUtils.isEmpty(filePath)) {
+            Glide.with(this).load(filePath).apply(options).into(people_img);
+        }
+    }
 
 
     @Override

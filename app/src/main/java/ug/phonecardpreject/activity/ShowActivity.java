@@ -34,6 +34,11 @@ public class ShowActivity  extends BaseActivity {
 
     @Override
     protected void initViews(ViewHolder holder, View root) {
+        String filePath = FileUtil.getPath() + File.separator + "photo";
+        File file = new File(filePath);
+        if(!file.exists()){
+            file.mkdirs();
+        }
         holder.setOnClickListener(this, R.id.ll_scan,R.id.ll_xin,R.id.ll_faxing,R.id.ll_clean_data,
                 R.id.ll_data_down,R.id.ll_data_up,R.id.ll_setup,R.id.ll_quit);
     }
@@ -51,7 +56,7 @@ public class ShowActivity  extends BaseActivity {
                 toastShort("等待添加功能");
                 break;
             case R.id.ll_clean_data:
-                toastShort("等待添加功能");
+//                toastShort("等待添加功能");
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setMessage("是否要清除所有数据？")//dialog_msg
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {

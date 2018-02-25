@@ -4,23 +4,31 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
+
+import java.io.File;
+
 import ug.phonecardpreject.R;
 import ug.phonecardpreject.base.BaseActivity;
 import ug.phonecardpreject.base.ViewHolder;
 import ug.phonecardpreject.bean.WhiteList;
 import ug.phonecardpreject.greendaodemo.GreenDaoManager;
 import ug.phonecardpreject.greendaodemo.greendao.gen.WhiteListDao;
+import ug.phonecardpreject.util.FileUtil;
 
 
 public class XinActivity extends BaseActivity {
@@ -28,6 +36,7 @@ public class XinActivity extends BaseActivity {
     private TextView card_no,title_text,name;
     LinearLayout ll_img,wrong_tip,right_tip;
     RelativeLayout ll_content;
+    ImageView people_img;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -41,9 +50,11 @@ public class XinActivity extends BaseActivity {
         ll_img = holder.get(R.id.ll_img);
         ll_content = holder.get(R.id.ll_content);
         name = holder.get(R.id.name);
+        people_img = holder.get(R.id.people_img);
         wrong_tip = holder.get(R.id.wrong_tip);
         right_tip = holder.get(R.id.right_tip);
         title_text.setText("芯片验票");
+        Card.init(115200);
     }
 
     @Override
@@ -79,6 +90,7 @@ public class XinActivity extends BaseActivity {
                 right_tip.setVisibility(View.VISIBLE);
                 name.setText(whiteList.getName());
                 card_no.setText(whiteList.getXin_id());
+                showImage(whiteList.getName());
             }else if(msg.what == 2){
                 ll_img.setVisibility(View.GONE);
                 ll_content.setVisibility(View.VISIBLE);
@@ -86,9 +98,19 @@ public class XinActivity extends BaseActivity {
                 right_tip.setVisibility(View.GONE);
                 name.setText("");
                 card_no.setText("");
+                people_img.setImageResource(R.drawable.no_people);
             }
         }
     };
+
+    public void showImage(String name){
+        String filePath = FileUtil.getPath() + File.separator + "photo" + "name" + ".jpeg";
+        RequestOptions options = new RequestOptions()
+                .error(R.drawable.no_people);
+        if (!TextUtils.isEmpty(filePath)) {
+            Glide.with(this).load(filePath).apply(options).into(people_img);
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -109,11 +131,11 @@ public class XinActivity extends BaseActivity {
                         handler.sendMessage(msg);
                     } else {
                         String s = Hex.toHexString(id);//获取到卡片ID值之后(16进制数组转化为字符串);
-
+                        Card.rf_beep(20);
                         Log.i("sss", ">>>>>>>>" + s);
                         checkData(s);
                     }
-                    Thread.sleep(300);
+                    Thread.sleep(1500);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,6 +168,7 @@ public class XinActivity extends BaseActivity {
         ModuleControl.rf_rfinf_reset(Ultralight.id, (byte) 0);
         Ultralight.offLog();
         Ultralight.exit();
+        Card.exit();
     }
 
 
