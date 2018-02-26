@@ -12,16 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.yuwei.utils.Card;
 import com.yuwei.utils.Hex;
 import com.yuwei.utils.ModuleControl;
 import com.yuwei.utils.Ultralight;
-
 import java.io.File;
-
 import ug.phonecardpreject.R;
 import ug.phonecardpreject.base.BaseActivity;
 import ug.phonecardpreject.base.ViewHolder;
@@ -104,11 +100,9 @@ public class XinActivity extends BaseActivity {
     };
 
     public void showImage(String name){
-        String filePath = FileUtil.getPath() + File.separator + "photo" + "name" + ".jpeg";
-        RequestOptions options = new RequestOptions()
-                .error(R.drawable.no_people);
+        String filePath = FileUtil.getPath() + File.separator + "photo" + File.separator + name + ".png";
         if (!TextUtils.isEmpty(filePath)) {
-            Glide.with(this).load(filePath).apply(options).into(people_img);
+            Glide.with(this).load(filePath).error(R.drawable.no_people).into(people_img);
         }
     }
 
@@ -144,6 +138,7 @@ public class XinActivity extends BaseActivity {
         }
 
         private void checkData(String ticket) {
+            ticket = ticket.toUpperCase();
             WhiteList whiteList= GreenDaoManager.getInstance().getSession().getWhiteListDao()
                     .queryBuilder().where(WhiteListDao.Properties.Xin_id.eq(ticket)).build().unique();
             if(whiteList != null){
