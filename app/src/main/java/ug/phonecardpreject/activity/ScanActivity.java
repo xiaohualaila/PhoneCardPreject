@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,9 +27,9 @@ import ug.phonecardpreject.util.FileUtil;
 public class ScanActivity extends BaseActivity {
     private TextView info,title_text,name;
 
-    LinearLayout ll_img,wrong_tip,right_tip;
+    LinearLayout ll_img,ll_tip;
     RelativeLayout ll_content;
-    ImageView card_img,people_img;
+    ImageView card_img,people_img,left_img,right_img;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -43,11 +42,12 @@ public class ScanActivity extends BaseActivity {
         info = holder.get(R.id.card_no);
         ll_img = holder.get(R.id.ll_img);
         ll_content = holder.get(R.id.ll_content);
+        ll_tip = holder.get(R.id.ll_tip);
         card_img = holder.get(R.id.card_img);
         people_img = holder.get(R.id.people_img);
         name = holder.get(R.id.name);
-        wrong_tip = holder.get(R.id.wrong_tip);
-        right_tip = holder.get(R.id.right_tip);
+        left_img = holder.get(R.id.left_img);
+        right_img = holder.get(R.id.right_img);
         title_text.setText("二维码验票");
         card_img.setImageResource(R.drawable.er);
         Card.onLog(handler);
@@ -62,26 +62,38 @@ public class ScanActivity extends BaseActivity {
             if (msg.what == -1) {
                 ll_img.setVisibility(View.VISIBLE);
                 ll_content.setVisibility(View.GONE);
-                wrong_tip.setVisibility(View.GONE);
-                right_tip.setVisibility(View.GONE);
+                ll_tip.setVisibility(View.GONE);
             } else if (msg.what == 1) {
                 //查询到人
                 WhiteList whiteList = (WhiteList) msg.obj;
                 ll_img.setVisibility(View.GONE);
                 ll_content.setVisibility(View.VISIBLE);
-                wrong_tip.setVisibility(View.GONE);
-                right_tip.setVisibility(View.VISIBLE);
+                ll_tip.setVisibility(View.VISIBLE);
+                left_img.setImageResource(R.drawable.right_1);
+                right_img.setImageResource(R.drawable.right);
                 name.setText(whiteList.getName());
                 info.setText(whiteList.getCode_id());
                 showImage(whiteList.getName());
             }else if(msg.what == 2){
                 ll_img.setVisibility(View.GONE);
                 ll_content.setVisibility(View.VISIBLE);
-                wrong_tip.setVisibility(View.VISIBLE);
-                right_tip.setVisibility(View.GONE);
+                ll_tip.setVisibility(View.VISIBLE);
+                left_img.setImageResource(R.drawable.wrong_1);
+                right_img.setImageResource(R.drawable.wrong);
                 name.setText("");
                 info.setText("");
                 people_img.setImageResource(R.drawable.no_people);
+            }else if (msg.what == 3) {
+                //入场次数太多
+                WhiteList whiteList = (WhiteList) msg.obj;
+                ll_img.setVisibility(View.GONE);
+                ll_content.setVisibility(View.VISIBLE);
+                ll_tip.setVisibility(View.VISIBLE);
+                left_img.setImageResource(R.drawable.too_num2);
+                right_img.setImageResource(R.drawable.too_num1);
+                name.setText(whiteList.getName());
+                info.setText(whiteList.getXin_id());
+                showImage(whiteList.getName());
             }
         }
     };
@@ -145,10 +157,31 @@ public class ScanActivity extends BaseActivity {
         WhiteList whiteList= GreenDaoManager.getInstance().getSession().getWhiteListDao()
                 .queryBuilder().where(WhiteListDao.Properties.Code_id.eq(ticket)).build().unique();
         if(whiteList != null){
-            Message msg = Message.obtain();
-            msg.what = 1;
-            msg.obj = whiteList;
-            handler.sendMessage(msg);
+            String num_str = whiteList.getNum();
+            if(!num_str.isEmpty()){
+                int num = Integer.parseInt(num_str);
+                if(num > 3){
+                    //入场次数太多
+                    Message msg = Message.obtain();
+                    msg.what = 3;
+                    msg.obj = whiteList;
+                    handler.sendMessage(msg);
+                }else {
+                    whiteList.setNum(String.valueOf(num + 1));
+                    GreenDaoManager.getInstance().getSession().getWhiteListDao().update(whiteList);
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = whiteList;
+                    handler.sendMessage(msg);
+                }
+            }else {
+                whiteList.setNum("1");
+                GreenDaoManager.getInstance().getSession().getWhiteListDao().update(whiteList);
+                Message msg = Message.obtain();
+                msg.what = 1;
+                msg.obj = whiteList;
+                handler.sendMessage(msg);
+            }
         }else {
             Message msg = Message.obtain();
             msg.what = 2;

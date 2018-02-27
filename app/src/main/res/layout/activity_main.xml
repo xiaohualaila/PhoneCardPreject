@@ -46,7 +46,7 @@
 
     </LinearLayout>
 
-
+    <!--读到信息显示-->
     <RelativeLayout
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
@@ -115,41 +115,23 @@
 
     </RelativeLayout>
     <LinearLayout
-        android:id="@+id/right_tip"
+        android:id="@+id/ll_tip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:visibility="gone"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:gravity="center">
         <ImageView
+            android:id="@+id/left_img"
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/right_1"/>
+            android:layout_height="60dp" />
         <ImageView
+            android:id="@+id/right_img"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/right"/>
-
+            android:layout_height="60dp" />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/wrong_tip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/wrong_1"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/wrong"/>
 
-    </LinearLayout>
     <!--<Button-->
         <!--android:id="@+id/read_id"-->
         <!--android:layout_width="match_parent"-->
