@@ -86,7 +86,7 @@ public class ShowActivity  extends BaseActivity {
                 break;
             case R.id.ll_setup:
                 toastShort("等待添加功能");
-             //   openActivity(SetUpActivity.class);
+                openActivity(SetupActivity.class);
                 break;
             case R.id.ll_quit:
                 quitPreject();

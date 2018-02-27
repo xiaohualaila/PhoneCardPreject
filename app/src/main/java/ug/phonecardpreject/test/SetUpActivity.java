@@ -6,8 +6,9 @@ import com.yuwei.utils.Hex;
 import ug.phonecardpreject.R;
 import ug.phonecardpreject.base.*;
 import ug.phonecardpreject.storage.Sp;
-import ug.phonecardpreject.util.ClearEditText;
+
 import ug.phonecardpreject.util.Utils;
+import ug.phonecardpreject.view.ClearEditText;
 
 import static ug.phonecardpreject.util.C.csecret;
 import static ug.phonecardpreject.util.C.sql;

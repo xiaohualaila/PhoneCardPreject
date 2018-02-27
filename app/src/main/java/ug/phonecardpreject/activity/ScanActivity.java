@@ -20,6 +20,7 @@ import ug.phonecardpreject.bean.WhiteList;
 import ug.phonecardpreject.greendaodemo.GreenDaoManager;
 import ug.phonecardpreject.greendaodemo.greendao.gen.WhiteListDao;
 import ug.phonecardpreject.util.FileUtil;
+import ug.phonecardpreject.util.SharedPreferencesUtil;
 
 /**
  * 二维码验票
@@ -30,6 +31,7 @@ public class ScanActivity extends BaseActivity {
     LinearLayout ll_img,ll_tip;
     RelativeLayout ll_content;
     ImageView card_img,people_img,left_img,right_img;
+    private int current_num = 5;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -52,7 +54,10 @@ public class ScanActivity extends BaseActivity {
         card_img.setImageResource(R.drawable.er);
         Card.onLog(handler);
         Card.init(115200);
-
+        String enter_num = SharedPreferencesUtil.getStringByKey("enter_num",this);
+        if(!TextUtils.isEmpty(enter_num)){
+            current_num = Integer.valueOf(enter_num);
+        }
     }
 
     private Handler handler = new Handler() {
@@ -160,7 +165,7 @@ public class ScanActivity extends BaseActivity {
             String num_str = whiteList.getNum();
             if(!num_str.isEmpty()){
                 int num = Integer.parseInt(num_str);
-                if(num > 3){
+                if(num >= current_num){
                     //入场次数太多
                     Message msg = Message.obtain();
                     msg.what = 3;

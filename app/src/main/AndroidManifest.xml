@@ -41,9 +41,8 @@
 
         </activity>
         <activity android:name=".test.SetUpActivity">
-
-
-
+        </activity>
+        <activity android:name=".activity.SetupActivity">
         </activity>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>

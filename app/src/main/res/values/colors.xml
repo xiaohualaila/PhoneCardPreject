@@ -6,4 +6,6 @@
     <color name="black">#262626</color>
     <color name="wright">#ffffff</color>
     <color name="title_bar">#25848f</color>
+    <color name="title_bar1">#1b646c</color>
+    <color name="gray">#ded7d7</color>
 </resources>
